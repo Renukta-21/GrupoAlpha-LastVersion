@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme{
+    --color-mainDarkBlue: #001139;
+    --color-cartBackground:#F59E0B;
+    --color-secondaryBlue: #000B26;
+    --color-thirdBlue:#000719;
+}
+
+@layer components{
+    .searchProductsinput{
+        @apply placeholder-gray-500 text-gray-300 outline-none 
+    }
+}
