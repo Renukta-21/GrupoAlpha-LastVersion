@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
+const {getToken} = require('./services/syscom.js')
 
 const logger = require('./middleware/logger');
+const getSyscomToken = require('./services/syscom');
+
 const port = 3001 || process.env.PORT;
 
 app.use(logger);
@@ -12,7 +15,9 @@ app.get('/', (req,res)=>{
 app.get('/something', (req,res)=>{
     res.send('Hello from something route!');
 })
-
+app.get('/getToken', (req,res)=>{
+    res.send(`Syscom Token`);
+})
 app.listen(port, ()=>{
     console.log(`Server running on port ${port}`);  
 })
