@@ -12,7 +12,7 @@ const getToken = async()=>{
         
         const tokenResponse = await authInstance.post("", payload)
         console.log('GOT TOKEN')
-        tokenResponse.data
+        return tokenResponse.data
     } catch (error) {
         return error.response.data
     }

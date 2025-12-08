@@ -1,22 +1,23 @@
 const express = require('express');
 const app = express();
-const {getToken} = require('./services/syscom.js')
-
+const {getToken} = require('./services/auth.js')
 const logger = require('./middleware/logger');
-const getSyscomToken = require('./services/syscom');
+const { getCategories, getCategoryItems } = require('./services/backendRequests.js');
+const cors = require('cors');
 
 const port = 3001 || process.env.PORT;
 
+app.use(cors());
 app.use(logger);
 app.get('/', (req,res)=>{
     res.send('Hello from the server!');
 })
 
-app.get('/something', (req,res)=>{
-    res.send('Hello from something route!');
+app.get('/categories', async(req,res)=>{
+    res.send(await getCategories());
 })
-app.get('/getToken', (req,res)=>{
-    res.send(`Syscom Token`);
+app.get('/categories/:id', async(req,res)=>{
+    res.send(await getCategoryItems(32));
 })
 app.listen(port, ()=>{
     console.log(`Server running on port ${port}`);  
