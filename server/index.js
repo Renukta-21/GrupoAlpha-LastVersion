@@ -17,7 +17,8 @@ app.get('/categories', async(req,res)=>{
     res.send(await getCategories());
 })
 app.get('/categories/:id', async(req,res)=>{
-    res.send(await getCategoryItems(32));
+    const id = req.params.id;   
+    res.send(await getCategoryItems(id));
 })
 app.listen(port, ()=>{
     console.log(`Server running on port ${port}`);  
