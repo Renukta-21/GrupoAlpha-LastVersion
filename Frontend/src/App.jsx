@@ -1,12 +1,12 @@
 import React from 'react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { MdOutlineLocalFireDepartment } from "react-icons/md";
+import { IoSearch } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { IoSearch } from "react-icons/io5";
 import logo from './assets/logo.jpeg'
 import logoDark from './assets/logoDark.png'
-import axios from 'axios';
+import MenuComponent from './MenuComponent.jsx'; 
 import apiInstance from './apiInstance.js';
 import { useState, useEffect } from 'react';
 
@@ -20,9 +20,23 @@ function App() {
 
   const fetchCategories = async () => {
     const response = await apiInstance.get('/categories');
-    setCategories(response.data);
-    console.log(response.data);
+    const cats = response.data;
+
+    const subRequests = cats.map(c =>
+      apiInstance.get(`/categories/${c.id}`).then(r => r.data)
+    );
+
+    const subcategories = await Promise.all(subRequests);
+
+    const finalData = cats.map((cat, index) => ({
+      ...cat,
+      subcategorias: subcategories[index]
+    }));
+
+    setCategories(finalData);
+    console.log(finalData);
   };
+
   const handleMenuClick = (e) => {
     e.preventDefault();
     setMenuOpened(!menuOpened);
@@ -70,46 +84,6 @@ function App() {
       </nav>
     </div>
   );
-}
-function MenuComponent({categories, menuOpened, setMenuOpened}) {
-  return (
-    <>
-      {menuOpened && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-[1px] z-10"></div>
-      )}
-
-      <div
-        className={`${menuOpened
-          ? "fixed z-20 bg-secondaryBlue left-0 w-4/5 h-full translate-x-0 border-r-[1px] border-blue-950"
-          : "hidden -translate-x-full"
-          }`}
-      >
-
-        <section className="py-3 pl-4 pr-6">
-          <div className="flex justify-between">
-            <div className="border-[1px] border-gray-500 rounded-xl flex items-center">
-              <IoSearch className="mx-4 text-gray-500" />
-              <input type="text" placeholder='Buscar categorias...' className='placeholder-gray-500 text-gray-300 outline-none py-2' />
-            </div>
-            <div>
-              <button className='text-gray-500 text-2xl' onClick={() => setMenuOpened(false)}>x</button>
-            </div>
-          </div>
-        </section>
-        <div className='w-full h-[1px] bg-blue-950'></div>
-
-        <section className='h-full'>
-          <ul className="flex flex-col gap-4 bg-thirdBlue">
-            {categories.map((category) => (
-              <li key={category.id} className="text-gray-300 hover:bg-blue-700 rounded-lg px-3 py-2">
-                <a href="">{category.nombre}</a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </>
-  )
 }
 
 export default App
