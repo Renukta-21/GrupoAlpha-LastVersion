@@ -5,6 +5,7 @@
     --color-cartBackground:#F59E0B;
     --color-secondaryBlue: #000B26;
     --color-thirdBlue:#000719;
+    --color-buttonBlue:#3D53FF;
 }
 
 @layer components{
