@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const apiInstance = axios.create({
-    baseURL: "https://grupoalpha-lastversion.onrender.com/"
+    baseURL: "http://localhost:3001/"
 })
 
 export default apiInstance;

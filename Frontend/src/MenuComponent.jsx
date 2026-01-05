@@ -14,16 +14,16 @@ function MenuComponent({ categories, menuOpened, setMenuOpened }) {
     }
 
     return (
-        <>
+        <div className="">
             {menuOpened && (
                 <div className="fixed inset-0 bg-black/50 backdrop-blur-[1px] z-10"></div>
             )}
 
             <div
                 className={`${menuOpened
-                    ? "fixed z-20  bg-thirdBlue left-0 w-11/12 h-full sm:w-2/5 translate-x-0 border-r-[1px] border-blue-950"
+                    ? "fixed z-20  bg-secondaryBlue left-0 w-11/12 h-full overflow-hidden sm:w-2/5 translate-x-0 border-r-[1px] border-blue-950"
                     : "hidden -translate-x-full"
-                    }`}
+                    } ${selectedCategory && 'overflow-y-scroll'}`}
             >
 
                 <section className="py-3 pl-4 bg-mainDarkBlue">
@@ -49,7 +49,7 @@ function MenuComponent({ categories, menuOpened, setMenuOpened }) {
                         </ul>
                     </section>}
             </div>
-        </>
+        </div>
     )
 }
 function DisplayedCategory({ category, handleOpenSubMenu }) {
