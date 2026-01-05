@@ -3,6 +3,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { MdNavigateNext } from "react-icons/md";
 
 function SubMenuComponent({ category, setSelectedCategory }) {
+    console.log(category)
     const {subcategorias} = category.subcategorias
     return (
         <div className="fixed inset-0 bg-secondaryBlue z-10 h-fit">
@@ -20,7 +21,7 @@ function SubMenuComponent({ category, setSelectedCategory }) {
             <div className="h-[1px] bg-gray-500 w-full"></div>
             <section className="mt-4 ">
                 {subcategorias.map(sub => (
-                    <div className="text-gray-300 px-3 ">
+                    <div className="text-gray-300 px-3 " key={sub.id}>
                         <div className="flex items-center px-4 py-[11px] justify-between text-[15px] font-semibold hover:bg-blue-950 cursor-pointer rounded-md">
                             <span>{sub.nombre}</span> <MdNavigateNext className="text-xl" />
                         </div>

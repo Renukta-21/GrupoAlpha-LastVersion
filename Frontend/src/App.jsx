@@ -5,35 +5,27 @@ import NavBar from './NavBar.jsx';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home.jsx';
 import MainPage from './MainPage.jsx';
-
+import ProductViewPage from './pages/ProductViewPage.jsx';
+import { fetchCategories } from './services/categoryServices.js';
+import Breadcrumb from './components/Breadcrum.jsx';
+import CategoryDisplay from './pages/CategoryDisplay.jsx';
 
 function App() {
   const [categories, setCategories] = useState([]);
   const [menuOpened, setMenuOpened] = useState(false);
 
   useEffect(() => {
-    fetchCategories();
+   loadCategories()
   }, []);
 
-  const fetchCategories = async () => {
-    const response = await apiInstance.get('/categories');
-    const cats = response.data;
-
-    const subRequests = cats.map(c =>
-      apiInstance.get(`/categories/${c.id}`).then(r => r.data)
-    );
-
-    const subcategories = await Promise.all(subRequests);
-
-    const finalData = cats.map((cat, index) => ({
-      ...cat,
-      subcategorias: subcategories[index]
-    }));
-
-    setCategories(finalData);
-    console.log(finalData);
-  };
-
+const loadCategories = async()=>{
+   try {
+      const data = await fetchCategories()
+      setCategories(data);
+    } catch (error) {
+      console.log('Error loading categories') 
+    }
+}
   const handleMenuClick = (e) => {
     e.preventDefault();
     setMenuOpened(!menuOpened);
@@ -44,8 +36,12 @@ function App() {
       <div className="bg-mainDarkBlue min-h-screen px-2 relative">
         <MenuComponent categories={categories} menuOpened={menuOpened} setMenuOpened={setMenuOpened} />
         <NavBar handleMenuClick={handleMenuClick} />
+       {/*  <Breadcrumb/> */}
         <Routes>
           <Route path='/' element={<Home/>}/>
+          <Route path='/products/:id' element={<ProductViewPage/>}/>
+          {/* <Route path='/category' element={<CategoryDisplay/>}/> */}
+          <Route path='/category/:id' element={<CategoryDisplay categories={categories}/>}/>
           <Route path='/products' element={<MainPage/>}></Route>
         </Routes>
       </div>
