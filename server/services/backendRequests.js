@@ -33,8 +33,26 @@ const getCategoryItems = async(categoryID)=>{
         const response = await apiInstance.get(`/categorias/${categoryID}`)
         return response.data
     } catch (error) {
-        console.log(error.response.data)
+        throw error
     }
 }
 
-module.exports = {getCategories, getCategoryItems}
+const getProducts = async(categoria, pagina)=>{
+    try {
+        await setAPIToken()
+        const response = await apiInstance.get('/productos', {
+            params:{
+                categoria, 
+                pagina
+            }
+        })
+        return response.data
+    } catch (error) {
+        const apiError = error.response.data
+        throw{
+            message:apiError.detail
+        }
+    }
+} 
+
+module.exports = {getCategories, getCategoryItems, getProducts}

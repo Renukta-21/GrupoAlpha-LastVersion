@@ -9,8 +9,10 @@ import ProductViewPage from './pages/ProductViewPage.jsx';
 import { fetchCategories } from './services/categoryServices.js';
 import Breadcrumb from './components/Breadcrum.jsx';
 import CategoryDisplay from './pages/CategoryDisplay.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
+  const [selectedCatgeory, setSelectedCatgeory] = useState(null)
   const [categories, setCategories] = useState([]);
   const [menuOpened, setMenuOpened] = useState(false);
 
@@ -43,6 +45,7 @@ const loadCategories = async()=>{
           {/* <Route path='/category' element={<CategoryDisplay/>}/> */}
           <Route path='/category/:id' element={<CategoryDisplay categories={categories}/>}/>
           <Route path='/products' element={<MainPage/>}></Route>
+          <Route path='*' element={<NotFound/>}/>
         </Routes>
       </div>
   );
