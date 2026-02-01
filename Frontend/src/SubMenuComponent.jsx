@@ -1,8 +1,10 @@
 import { IoCloseSharp } from "react-icons/io5";
 import { IoChevronBack } from "react-icons/io5";
 import { MdNavigateNext } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
-function SubMenuComponent({ category, setSelectedCategory }) {
+function SubMenuComponent({ category, setSelectedCategory, setMenuOpened }) {
+    const navigate = useNavigate()
     console.log(category)
     const {subcategorias} = category.subcategorias
     return (
@@ -10,7 +12,12 @@ function SubMenuComponent({ category, setSelectedCategory }) {
             <section className='px-4 py-4 flex justify-between bg-mainDarkBlue'>
                 <h2 className='text-white text-xl font-semibold'>{category.nombre}</h2>
                 <div className="flex items-center">
-                    <button className="text-white bg-buttonBlue flex rounded-2xl px-3 py-1 text-[13px] flex items-center" >Ver todas <MdNavigateNext className="text-2xl font-bold" /></button>
+                    <button className="text-white bg-buttonBlue flex rounded-2xl px-3 py-1 text-[13px] flex items-center" 
+                    onClick={()=> {
+                        setSelectedCategory(null)
+                        setMenuOpened(false)
+                        navigate(`/categories/${category.id}`)
+                    }}>Ver todas <MdNavigateNext className="text-2xl font-bold" /></button>
                     <span className="text-gray-500 text-xl mx-3"><IoCloseSharp /></span>
                 </div>
             </section>

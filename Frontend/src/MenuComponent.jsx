@@ -42,7 +42,7 @@ function MenuComponent({ categories, menuOpened, setMenuOpened }) {
                 <div className="h-[1px] bg-gray-500 w-full"></div>
 
                 <div className='w-full h-[1px] px-2'></div>
-                {selectedCategory ? <SubMenuComponent category={selectedCategory} setSelectedCategory={setSelectedCategory}/> :
+                {selectedCategory ? <SubMenuComponent category={selectedCategory} setSelectedCategory={setSelectedCategory} setMenuOpened={setMenuOpened}/> :
                     <section className='h-full  flex flex-col bg-secondaryBlue'>
                         <ul className="flex flex-col gap-1 mt-4">
                             {categories.map((category) => (<DisplayedCategory key={category.id} category={category} handleOpenSubMenu={handleOpenSubMenu} />))}
