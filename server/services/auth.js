@@ -14,8 +14,9 @@ const getToken = async()=>{
         console.log('GOT TOKEN')
         return tokenResponse.data
     } catch (error) {
+        console.log(payload)
+        console.log('que putas madres' + error)
         return error.response.data
     }
 }
-
-module.exports={getToken}
+module.exports = {getToken}

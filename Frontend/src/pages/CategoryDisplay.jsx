@@ -8,14 +8,14 @@ function CategoryDisplay({ categories }) {
     const { id } = useParams()
     const [category, setCategory] = useState(null)
 
+    const fetchCategory = async()=>{
+        const apiResponse = await apiInstance.get(`/categories/${id}`)
+        console.log(apiResponse.data)
+        setCategory(apiResponse.data)
+    }
     useEffect(() => {
-        const loadCategory = async()=>{
-            const localCategory = categories.find(c=>c.id==id)
-            if(localCategory) setCategory(localCategory)
-        }
-
-        loadCategory()
-    }, [id, categories])
+         fetchCategory()
+    }, [])
 
 
     return (

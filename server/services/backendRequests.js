@@ -1,5 +1,6 @@
-const axios = require("axios")
-const { getToken } = require("./auth")
+
+const axios = require ('axios')
+const {getToken} = require("./auth")
 
 const apiInstance = axios.create({
     baseURL:"https://developers.syscom.mx/api/v1"
@@ -17,7 +18,7 @@ const setAPIToken = async() => {
     }
 }
 
-const getCategories = async()=>{
+ const getCategories = async()=>{
     try {
         await setAPIToken()
         const response = await apiInstance.get("/categorias")
@@ -27,7 +28,7 @@ const getCategories = async()=>{
     }
 }
 
-const getCategoryItems = async(categoryID)=>{
+ const getCategoryItems = async(categoryID)=>{
     try {
         await setAPIToken()
         const response = await apiInstance.get(`/categorias/${categoryID}`)
@@ -37,7 +38,7 @@ const getCategoryItems = async(categoryID)=>{
     }
 }
 
-const getProducts = async(categoria, pagina)=>{
+ const getProducts = async(categoria, pagina)=>{
     try {
         await setAPIToken()
         const response = await apiInstance.get('/productos', {
@@ -54,5 +55,4 @@ const getProducts = async(categoria, pagina)=>{
         }
     }
 } 
-
 module.exports = {getCategories, getCategoryItems, getProducts}

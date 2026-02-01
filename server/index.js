@@ -1,9 +1,8 @@
-const express = require('express');
+const express = require("express")
 const app = express();
-const {getToken} = require('./services/auth.js')
-const logger = require('./middleware/logger');
-const { getCategories, getCategoryItems, getProducts } = require('./services/backendRequests.js');
-const cors = require('cors');
+const logger = require("./middleware/logger")
+const { getCategories, getCategoryItems, getProducts } = require ('./services/backendRequests')
+const cors = require("cors")
 
 const port = 3001 || process.env.PORT;
 

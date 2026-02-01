@@ -25,7 +25,7 @@ const loadCategories = async()=>{
       const data = await fetchCategories()
       setCategories(data);
     } catch (error) {
-      console.log('Error loading categories') 
+      console.log('Error loading categories' + error) 
     }
 }
   const handleMenuClick = (e) => {
@@ -43,7 +43,7 @@ const loadCategories = async()=>{
           <Route path='/' element={<Home/>}/>
           <Route path='/products/:id' element={<ProductViewPage/>}/>
           {/* <Route path='/category' element={<CategoryDisplay/>}/> */}
-          <Route path='/category/:id' element={<CategoryDisplay categories={categories}/>}/>
+          <Route path='/categories/:id' element={<CategoryDisplay categories={categories}/>}/>
           <Route path='/products' element={<MainPage/>}></Route>
           <Route path='*' element={<NotFound/>}/>
         </Routes>
