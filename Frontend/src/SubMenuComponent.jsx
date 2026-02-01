@@ -29,7 +29,10 @@ function SubMenuComponent({ category, setSelectedCategory, setMenuOpened }) {
             <section className="mt-4 ">
                 {subcategorias.map(sub => (
                     <div className="text-gray-300 px-3 " key={sub.id}>
-                        <div className="flex items-center px-4 py-[11px] justify-between text-[15px] font-semibold hover:bg-blue-950 cursor-pointer rounded-md">
+                        <div className="flex items-center px-4 py-[11px] justify-between text-[15px] font-semibold hover:bg-blue-950 cursor-pointer rounded-md" onClick={()=> {
+                            navigate(`/categories/${sub.id}`)
+                            setMenuOpened(false)
+                        }}>
                             <span>{sub.nombre}</span> <MdNavigateNext className="text-xl" />
                         </div>
                     </div>

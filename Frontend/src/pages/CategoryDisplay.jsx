@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { MdHome } from "react-icons/md";
+import { MdNavigateNext } from "react-icons/md";
 import apiInstance from "../apiInstance"
 import NotFound from "./NotFound"
 
 function CategoryDisplay() {
   const { id } = useParams()
-
+  const navigate = useNavigate()
   const [category, setCategory] = useState(null)
   const [products, setProducts] = useState([])
   const [page, setPage] = useState(1)
@@ -79,8 +81,29 @@ function CategoryDisplay() {
   if (!category) return <NotFound />
 
   return (
-    <div className="text-white p-2">
-      <h1 className="text-3xl font-bold mb-8">{category.nombre}</h1>
+    <div className="text-white p-1">
+      {console.log(category)}
+      <h1 className="text-[15px] text-blue-400 mb-8 flex items-center flex-wrap gap-1">
+  <MdHome className="mr-1" />
+  <span className="cursor-pointer" onClick={() => navigate("/")}>Inicio</span>
+
+  {(category.origen || []).sort((a, b) => a.nivel - b.nivel).map((cat) => (
+    <span key={cat.id} className="flex items-center">
+      <MdNavigateNext />
+      <span className="cursor-pointer" onClick={() => {
+        navigate(`/categories/${Number(cat.id)}`)
+        
+      }}>
+        {cat.nombre}
+      </span>
+    </span>
+  ))}
+
+  <span className="flex items-center">
+    <MdNavigateNext />
+    <span className="font-bold text-white">{category.nombre}</span>
+  </span>
+</h1>
 
       <div className="grid grid-cols-2 gap-4">
         {products.map(product => (
