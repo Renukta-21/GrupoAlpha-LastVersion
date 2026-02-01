@@ -5,8 +5,10 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import logo from './assets/logo.jpeg'
 import logoDark from './assets/logoDark.png'
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({handleMenuClick}) {
+    const navigate = useNavigate()
     return (
         <nav className="py-2 mx-3">
             <section className="flex items-center justify-between">
@@ -15,7 +17,7 @@ export default function NavBar({handleMenuClick}) {
                         <RxHamburgerMenu />
                     </a>
 
-                    <a href="" className="max-w-[140px] block">
+                    <a href="" className="max-w-[140px] block" onClick={()=> navigate('/')}>
                         <img src={logoDark} alt="" className="w-full" />
                     </a>
                 </div>
