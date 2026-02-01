@@ -18,7 +18,7 @@ function SubMenuComponent({ category, setSelectedCategory, setMenuOpened }) {
                         setMenuOpened(false)
                         navigate(`/categories/${category.id}`)
                     }}>Ver todas <MdNavigateNext className="text-2xl font-bold" /></button>
-                    <span className="text-gray-500 text-xl mx-3"><IoCloseSharp /></span>
+                    <span className="text-gray-500 text-xl mx-3"><IoCloseSharp onClick={()=> setMenuOpened(false)} /></span>
                 </div>
             </section>
             <div className="h-[1px] bg-gray-500 w-full"></div>
